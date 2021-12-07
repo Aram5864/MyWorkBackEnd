@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
+use App\Http\Controllers\RegistrationController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,18 +17,24 @@ use App\Http\Controllers\MyController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 // Route::get('/test', function (Request $request) {
 //     return response()->json('hello');
 // });
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 
-Route::get ('/test',[MyController::class,'Test']);
-Route::post ('/contact/submit',[MyController::class,'contactMessage']);
+
+// Contact_Page
+Route::get('/message/contact', [MyController::class, 'ContactMessageCreate']);
+Route::get('/message/delete/{id}', [MyController::class, 'ContactMessageDelete']);
+Route::get('/message/send/{id}', [MyController::class, 'ContactMessageSend']);
+Route::post('/contact/submit', [MyController::class, 'ContactMessage']);
+// Registration
+Route::post('/registration/submit', [RegistrationController::class, 'RegistrationSubmit']);
+Route::post('/login/submit', [LoginController::class, 'Login']);
 
 
 
@@ -49,4 +58,3 @@ Route::post ('/contact/submit',[MyController::class,'contactMessage']);
 // Route::get (  '/categori_settings/{name}/{id}',  [App\Http\Controllers\MyController::class, 'SettingCat'       ])->name(   'categori_settings' );
 // Route::get (      '/categori_redactor/{id}',     [App\Http\Controllers\MyController::class, 'RedCatDat'        ])->name(   'categori_redactor' );
 // Route::post(  '/categori_redactor/complate/{id}',[App\Http\Controllers\MyController::class, 'RedCat'           ])->name(        'red_cat'      );
-
