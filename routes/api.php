@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegistrationController;
 
 /*
@@ -34,7 +35,11 @@ Route::get('/message/send/{id}', [MyController::class, 'ContactMessageSend']);
 Route::post('/contact/submit', [MyController::class, 'ContactMessage']);
 // Registration
 Route::post('/registration/submit', [RegistrationController::class, 'RegistrationSubmit']);
+// Login
 Route::post('/login/submit', [LoginController::class, 'Login']);
+//Product
+Route::get('/product', [ProductController::class, 'ProductCreat']);
+
 
 
 
